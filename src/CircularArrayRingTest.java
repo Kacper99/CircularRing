@@ -57,6 +57,7 @@ public class CircularArrayRingTest extends TestCase  {
         for(int i=0; i<1000; ++i) {
             ring.add(i);
         }
+        System.out.println(ring.size());
         assertTrue("Default size must be non-zero", ring.size()>0);
         // check default size is the default size
         Ring<Integer> ring1 = new CircularArrayRing<Integer>(55);

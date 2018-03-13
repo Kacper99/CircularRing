@@ -6,13 +6,12 @@ import java.util.NoSuchElementException;
 public class CircularArrayRing<E> extends AbstractCollection<E> implements Ring<E> {
 
     private static final int DEFAULT_RING_SIZE = 10;
-    private int ringSize, head, elementCount;
+    private int head, elementCount;
     private Object[] ringArray;
 
     public CircularArrayRing() {
         this.ringArray = new Object[DEFAULT_RING_SIZE];
         head = elementCount = 0;
-        head = -1;
     }
 
     public CircularArrayRing(int ringSize) {
@@ -23,9 +22,8 @@ public class CircularArrayRing<E> extends AbstractCollection<E> implements Ring<
     @Override
     public boolean add(E e) {
         head++;
-        if (head == ringArray.length) {
+        if (head == ringArray.length)
             head = 0;
-        }
         ringArray[head] = e;
         if (elementCount < ringArray.length)
             elementCount++;
@@ -61,7 +59,7 @@ public class CircularArrayRing<E> extends AbstractCollection<E> implements Ring<
             @Override
             public E next() {
                 Object nextElement = ringArray[currIndex];
-                if (currIndex < ringArray.length && ringArray[currIndex] != null)
+                if (!hasNext())
                     throw new NoSuchElementException("No element");
                 currIndex--;
                 if (currIndex < 0)

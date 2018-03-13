@@ -39,12 +39,8 @@ public class CircularArrayRing<E> extends AbstractCollection<E> implements Ring<
         if (index >= ringArray.length || index < 0)
             throw new IndexOutOfBoundsException("Index out of bounds");
 
-        //return (E) (head - index < 0 ? ringArray[head - index + ringArray.length] : ringArray[head-index]);
-
         int newIndex = head - index;
-        if (newIndex < 0)
-            newIndex += ringArray.length;
-        return (E) ringArray[newIndex];
+        return (E) (newIndex < 0 ? ringArray[newIndex + ringArray.length] : ringArray[newIndex]);
     }
 
     @Override
